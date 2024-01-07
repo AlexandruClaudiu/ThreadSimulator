@@ -1,13 +1,10 @@
 public class Phase {
     int fCpuTimeCount;
     int fInOutTimeCount;
-
     int phaseId;
     int cpuTimeCount;
     int inOutTimeCount;
     int repeatTimes;
-
-    int cpuTimeAllowed;
 
     public Phase(int fCpuTimeCount, int fInOutTimeCount, int phaseId, int repeatTimes) {
         this.fCpuTimeCount = fCpuTimeCount;
@@ -26,9 +23,6 @@ public class Phase {
         }
     }
 
-    public void setCpuTimeAllowed(int timeAllowed){
-        this.cpuTimeCount = timeAllowed;
-    }
 
     public void decreaseCpuTimeCount(){
         this.cpuTimeCount--;

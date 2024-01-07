@@ -12,13 +12,13 @@ public class QueueManager {
         this.queueLimit2 = queueLimit2;
         this.queueLimit3 = queueLimit3;
 
-        Q1 = new LinkedList<>();
-        Q2 = new LinkedList<>();
-        Q3 = new LinkedList<>();
-        IOQ = new LinkedList<>();
+        Q1 = new ArrayList<>();
+        Q2 = new ArrayList<>();
+        Q3 = new ArrayList<>();
+        IOQ = new ArrayList<>();
 
-        CPU = new LinkedList<>();
-        IO = new LinkedList<>();
+        CPU = new ArrayList<>();
+        IO = new ArrayList<>();
     }
 
     public void addProcessToCpu(Process process){
@@ -48,7 +48,7 @@ public class QueueManager {
     }
 
     public boolean ioIsOccupied(){
-        return !CPU.isEmpty();
+        return !IO.isEmpty();
     }
 
     public List<Process> getQ1() {
@@ -73,6 +73,54 @@ public class QueueManager {
 
     public List<Process> getIO() {
         return IO;
+    }
+
+    public String getInfo(){
+        String cpu = "-";
+        if(!CPU.isEmpty()){
+            cpu = String.valueOf(CPU.get(0).alias);
+        }
+        String io = "-";
+        if(!IO.isEmpty()){
+            io = String.valueOf(IO.get(0).alias);
+        }
+
+        String q1 = "Q1: ";
+        if(!Q1.isEmpty()){
+            for(int i = 0; i < Q1.size(); i++){
+                q1 += Q1.get(i).alias + " ";
+            }
+        } else {
+            q1 += "-";
+        }
+
+        String q2 = "Q2: ";
+        if(!Q2.isEmpty()){
+            for(int i = 0; i < Q2.size(); i++){
+                q2 += Q2.get(i).alias + " ";
+            }
+        } else {
+            q2 += "-";
+        }
+
+        String q3 = "Q3: ";
+        if(!Q3.isEmpty()){
+            for(int i = 0; i < Q3.size(); i++){
+                q3 += Q3.get(i).alias + " ";
+            }
+        } else {
+            q3 += "-";
+        }
+
+        String qio = "QIO: ";
+        if(!IOQ.isEmpty()){
+            for(int i = 0; i < IOQ.size(); i++){
+                qio += String.valueOf(IOQ.get(i).alias) + " ";
+            }
+        } else {
+           qio += "-";
+        }
+        return cpu + " " + io + " " + q1 + " " + q2 + " " + q3 + " " + qio;
     }
 
 }

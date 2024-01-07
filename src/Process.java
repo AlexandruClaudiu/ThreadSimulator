@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Process {
     String name;
-    String alias;
+    char alias;
 
     long startTime;
 
@@ -11,16 +11,17 @@ public class Process {
     int phaseCount;
 
     int currentQueueId;
+    int cpuTimeAllowed;
 
     int penaltyPoints = 0;
     int awardPoints = 0;
 
-    public Process(String name, String alias, long startTime, ArrayList<Phase> phases, int phaseCount) {
+    public Process(String name, char alias, long startTime, ArrayList<Phase> phases, int phaseCount) {
         this.name = name;
-        this.alias = alias;
         this.startTime = startTime;
         this.phases = phases;
         this.phaseCount = phaseCount;
+        this.alias = alias;
     }
 
     public void increasePenaltyPoints(){
@@ -32,12 +33,16 @@ public class Process {
     }
 
     public boolean isProcessDone(){
-        for(int i = 0; i < this.phaseCount; i++){
+        for(int i = 0; i < phases.size(); i++){
             if(!phases.get(i).isDone()){
                 return false;
             }
         }
         return true;
+    }
+
+    public void setAlias(char alias){
+        this.alias = alias;
     }
 
     public void removeFirstPhase(){
@@ -50,5 +55,9 @@ public class Process {
 
     public void setCurrentQueueId(int currentQueueId) {
         this.currentQueueId = currentQueueId;
+    }
+
+    public void setCpuTimeAllowed(int timeAllowed){
+        this.cpuTimeAllowed = timeAllowed;
     }
 }
